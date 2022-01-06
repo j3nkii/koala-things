@@ -71,7 +71,10 @@ function renderKoalas(koalas){
       <td>${koala.name}</td>
       <td>${koala.age}</td>
       <td>${koala.gender}</td>
-      <td>${koala.ready_to_transfer === 'Y' ? 'Yes' : 'No'}</td>
+      <td>
+        ${koala.ready_to_transfer === 'Y' ? 'Yes' : 'No'}
+        <button class = "koalaReady">Ready Koala</button>
+      </td>
       <td>${koala.notes}</td>
       <td>
         <button class = "deleteButton">DELETE</button>

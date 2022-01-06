@@ -10,7 +10,7 @@ const pool = new pg.Pool({
     port: 5432,
 });
 
-// GET all books
+// GET 
 koalaRouter.get('/', (req, res) => {
 	let queryText = 'SELECT * FROM "koalas" ORDER BY "name";';
 	pool
