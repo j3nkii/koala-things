@@ -3,7 +3,7 @@ CREATE TABLE "koalas" (
     "name" varchar(30) not null,
     "gender" varchar(1),
     "age" int,
-    "ready_to_transer" varchar(5),
+    "ready_to_transfer" varchar(5),
     "notes" varchar(255)
 );
 INSERT INTO "koalas" 
