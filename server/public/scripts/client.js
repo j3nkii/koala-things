@@ -48,3 +48,30 @@ function saveKoala( newKoala ){
   // ajax call to server to get koalas
  
 }
+
+function deleteKoala(){
+  $.ajax({
+    type: 'DELETE',
+    url: `/koala/${$(this).parents('tr').data('id')}`
+}).then((res) => {
+    console.log('DELETE:', res);
+    getKoalas();
+}).catch((err) => {
+    console.log('FAILED:', err);
+});
+}
+
+function renderKoalas(koalas){
+  for(let koala of koalas){
+    $('#viewKoalas').append(`
+    <td>${koala.name}</td>
+    <td>${koala.gender}</td>
+    <td>${koala.age}</td>
+    <td>${koala.ready_to_transfer}</td>
+    <td>${koala.notes}</td>
+    <td>
+      <button class = "deleteButton">DELETE</button>
+    </td>
+    `)
+  }
+}
