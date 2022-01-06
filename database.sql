@@ -2,7 +2,7 @@ CREATE TABLE "koalas" (
     "id" SERIAL PRIMARY KEY,
     "name" varchar(30) not null,
     "gender" varchar(1),
-    "age" int(2),
+    "age" int,
     "ready_to_transer" varchar(5),
     "notes" varchar(255)
 );
