@@ -73,18 +73,20 @@ function deleteKoala(){
 }
 
 function renderKoalas(koalas){
+  console.log(koalas);
+  $('#viewKoalas').empty()
   for(let koala of koalas){
     $('#viewKoalas').append(`
     <tr data-id = "${koala.id}">
       <td>${koala.name}</td>
-      <td>${koala.gender}</td>
       <td>${koala.age}</td>
-      <td>${koala.ready_to_transfer}</td>
+      <td>${koala.gender}</td>
+      <td>${koala.ready_to_transfer === 'Y' ? 'Yes' : 'No'}</td>
       <td>${koala.notes}</td>
       <td>
         <button class = "deleteButton">DELETE</button>
       </td>
     </tr>
-    `)
+    `);
   }
 }
