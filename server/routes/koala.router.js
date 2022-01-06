@@ -11,7 +11,7 @@ const pool = new pg.Pool({
 });
 
 // GET all books
-router.get('/', (req, res) => {
+koalaRouter.get('/', (req, res) => {
 	let queryText = 'SELECT * FROM "books" ORDER BY "name";';
 	pool
 		.query(queryText)

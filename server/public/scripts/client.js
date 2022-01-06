@@ -25,6 +25,7 @@ function setupClickListeners() {
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
   }); 
+  $(document).on('click', '.deleteButton', deleteKoala)
 }
 
 function getKoalas(){
@@ -64,14 +65,16 @@ function deleteKoala(){
 function renderKoalas(koalas){
   for(let koala of koalas){
     $('#viewKoalas').append(`
-    <td>${koala.name}</td>
-    <td>${koala.gender}</td>
-    <td>${koala.age}</td>
-    <td>${koala.ready_to_transfer}</td>
-    <td>${koala.notes}</td>
-    <td>
-      <button class = "deleteButton">DELETE</button>
-    </td>
+    <tr data-id = "${koala.id}">
+      <td>${koala.name}</td>
+      <td>${koala.gender}</td>
+      <td>${koala.age}</td>
+      <td>${koala.ready_to_transfer}</td>
+      <td>${koala.notes}</td>
+      <td>
+        <button class = "deleteButton">DELETE</button>
+      </td>
+    </tr>
     `)
   }
 }
