@@ -44,14 +44,26 @@ function getKoalas(){
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- 
+  // ajax to send new koala
+  $.ajax({
+		type: 'POST',
+		url: '/koalas',
+		data: newKoala
+	})
+		.then(function(response) {
+			console.log('Response from server:', response);
+			getKoalas();
+		})
+		.catch(function(error) {
+			console.log('Error in POST', error);
+			alert('Unable to add koala at this time. Please try again later.');
+		});
 }
 
 function deleteKoala(){
   $.ajax({
     type: 'DELETE',
-    url: `/koala/${$(this).parents('tr').data('id')}`
+    url: `/koalas/${$(this).parents('tr').data('id')}`
 }).then((res) => {
     console.log('DELETE:', res);
     getKoalas();
