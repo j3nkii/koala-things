@@ -12,15 +12,13 @@ $( document ).ready( function(){
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
+    // creates object with input values from DOM
     let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
+      name: $('#nameIn').val(),
+      age: $('#ageIn').val(),
+      gender: $('#genderIn').val(),
+      readyForTransfer: $('#readyForTransferIn').val(),
+      notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
@@ -72,14 +70,26 @@ function getKoalas(){
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- 
+  // ajax to send new koala
+  $.ajax({
+		type: 'POST',
+		url: '/koalas',
+		data: newKoala
+	})
+		.then(function(response) {
+			console.log('Response from server:', response);
+			getKoalas();
+		})
+		.catch(function(error) {
+			console.log('Error in POST', error);
+			alert('Unable to add koala at this time. Please try again later.');
+		});
 }
 
 function deleteKoala(){
   $.ajax({
     type: 'DELETE',
-    url: `/koala/${$(this).parents('tr').data('id')}`
+    url: `/koalas/${$(this).parents('tr').data('id')}`
 }).then((res) => {
     console.log('DELETE:', res);
     getKoalas();
@@ -89,13 +99,15 @@ function deleteKoala(){
 }
 
 function renderKoalas(koalas){
+  console.log(koalas);
+  $('#viewKoalas').empty()
   for(let koala of koalas){
     $('#viewKoalas').append(`
     <tr data-id = "${koala.id}">
       <td>${koala.name}</td>
-      <td>${koala.gender}</td>
       <td>${koala.age}</td>
-      <td>${koala.ready_to_transfer}</td>
+      <td>${koala.gender}</td>
+      <td>${koala.ready_to_transfer === 'Y' ? 'Yes' : 'No'}</td>
       <td>${koala.notes}</td>
       <td>
         <button class = "koalaReady">
@@ -106,6 +118,6 @@ function renderKoalas(koalas){
         <button class = "deleteButton">DELETE</button>
       </td>
     </tr>
-    `)
+    `);
   }
 }
