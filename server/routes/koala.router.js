@@ -12,7 +12,7 @@ const pool = new pg.Pool({
 
 // GET all books
 koalaRouter.get('/', (req, res) => {
-	let queryText = 'SELECT * FROM "books" ORDER BY "name";';
+	let queryText = 'SELECT * FROM "koalas" ORDER BY "name";';
 	pool
 		.query(queryText)
 		.then((result) => {

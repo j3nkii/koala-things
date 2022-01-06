@@ -14,4 +14,4 @@ VALUES
     ('Ororo', 'F', '7', 'N', 'Loves listening to Paula (Abdul)'),
     ('Logan', 'M', '15', 'N', 'Loves the sauna'),
     ('Charlie', 'M', '9', 'Y', 'Favorite band is Nirvana'),
-    ('Betsy', 'F', '4', 'Y', 'Has a pet iguana'),
+    ('Betsy', 'F', '4', 'Y', 'Has a pet iguana');
