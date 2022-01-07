@@ -53,7 +53,7 @@ koalaRouter.post('/', (req, res) => {
 });
 
 // PUT
-koalaRouter.put('/:koalasId', (req, res) => {
+koalaRouter.put('/:id', (req, res) => {
     // Grab the URL parameter
     console.log('id is', req.params.id);
     console.log('req.body', req.body);
@@ -64,7 +64,7 @@ koalaRouter.put('/:koalasId', (req, res) => {
     `;
     let queryParams = [
         req.params.ready_to_transfer,       //$1
-        req.params.koalasId                       //$2
+        req.params.id                       //$2
     ];
 
     pool.query(queryText, queryParams)
