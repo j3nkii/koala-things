@@ -56,6 +56,7 @@ koalaRouter.post('/', (req, res) => {
 koalaRouter.put('/:id', (req, res) => {
     // Grab the URL parameter
     console.log('id is', req.params.id);
+    console.log('req.params.ready_to_transfer is', req.body.ready_to_transfer);
     console.log('req.body', req.body);
     let queryText = `
     UPDATE "koalas"
@@ -63,7 +64,7 @@ koalaRouter.put('/:id', (req, res) => {
     WHERE "id" = $2;
     `;
     let queryParams = [
-        req.params.ready_to_transfer,       //$1
+        req.body.ready_to_transfer,       //$1
         req.params.id                       //$2
     ];
 
