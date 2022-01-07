@@ -64,7 +64,7 @@ koalaRouter.put('/:id', (req, res) => {
     WHERE "id" = $2;
     `;
     let queryParams = [
-        req.body.ready_to_transfer,       //$1
+        req.body.ready_to_transfer,         //$1
         req.params.id                       //$2
     ];
 
