@@ -6,8 +6,9 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
 }); // end doc ready
+
+
 
 function setupClickListeners() {
   $( '#addButton' ).on( 'click', function(){
@@ -20,11 +21,13 @@ function setupClickListeners() {
       ready_to_transfer: $('#readyForTransferIn').val().toUpperCase(),
       notes: $('#notesIn').val(),
     };
-    // call saveKoala with the new obejct
+    // call saveKoala with the new object
     saveKoala( koalaToSend );
   }); 
   $(document).on('click', '.deleteButton', deleteKoala)
 }
+
+
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -42,16 +45,16 @@ function getKoalas(){
 		});
 } // end getKoalas
 
-function saveKoala( newKoala ){
 
+
+
+function saveKoala( newKoala ){
   if(!/^[a-zA-z]+$/.test(newKoala.name) ||
     !/^[MF]$/.test(newKoala.gender) ||
     !/^[0-9]{1,2}$/.test(newKoala.age) ||
     !/^[YN]$/.test(newKoala.ready_to_transfer)){
       return alert('nah son')
     }
-
-
   console.log( 'in saveKoala', newKoala );
   // ajax to send new koala
   $.ajax({
@@ -69,6 +72,8 @@ function saveKoala( newKoala ){
 		});
 }
 
+
+
 function deleteKoala(){
   $.ajax({
     type: 'DELETE',
@@ -80,6 +85,8 @@ function deleteKoala(){
     console.log('FAILED:', err);
 });
 }
+
+
 
 function renderKoalas(koalas){
   console.log(koalas);
