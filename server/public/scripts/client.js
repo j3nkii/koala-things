@@ -16,8 +16,8 @@ function setupClickListeners() {
     let koalaToSend = {
       name: $('#nameIn').val(),
       age: $('#ageIn').val(),
-      gender: $('#genderIn').val(),
-      readyForTransfer: $('#readyForTransferIn').val(),
+      gender: $('#genderIn').val().toUpperCase(),
+      ready_to_transfer: $('#readyForTransferIn').val().toUpperCase(),
       notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
@@ -43,6 +43,15 @@ function getKoalas(){
 } // end getKoalas
 
 function saveKoala( newKoala ){
+
+  if(!/^[a-zA-z]+$/.test(newKoala.name) ||
+    !/^[MF]$/.test(newKoala.gender) ||
+    !/^[0-9]{1,2}$/.test(newKoala.age) ||
+    !/^[YN]$/.test(newKoala.ready_to_transfer)){
+      return alert('nah son')
+    }
+
+
   console.log( 'in saveKoala', newKoala );
   // ajax to send new koala
   $.ajax({
@@ -83,7 +92,6 @@ function renderKoalas(koalas){
       <td>${koala.gender}</td>
       <td>
         ${koala.ready_to_transfer === 'Y' ? 'Yes' : 'No'}
-        <button class = "koalaReady">Ready Koala</button>
       </td>
       <td>${koala.notes}</td>
       <td>
