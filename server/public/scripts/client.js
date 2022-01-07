@@ -74,18 +74,30 @@ function saveKoala( newKoala ){
 
 
 
-function deleteKoala(){
-  $.ajax({
-    type: 'DELETE',
-    url: `/koalas/${$(this).parents('tr').data('id')}`
-}).then((res) => {
-    console.log('DELETE:', res);
-    getKoalas();
-}).catch((err) => {
-    console.log('FAILED:', err);
-});
+function deleteKoala() {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: 'DELETE',
+				url: `/koalas/${$(this).parents('tr').data('id')}`
+			}).then((res) => {
+					console.log('DELETE:', res);
+					getKoalas();
+			}).catch((err) => {
+					console.log('FAILED:', err);
+				});
+			Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+		}
+	});
 }
-
 
 
 function renderKoalas(koalas){
