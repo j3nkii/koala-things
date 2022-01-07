@@ -10,7 +10,9 @@ const pool = new pg.Pool({
     port: 5432,
 });
 
-// GET all books
+
+
+// GET 
 koalaRouter.get('/', (req, res) => {
 	let queryText = 'SELECT * FROM "koalas" ORDER BY "name";';
 	pool
@@ -25,6 +27,8 @@ koalaRouter.get('/', (req, res) => {
 		});
 });
 //End GET /koalas endpoint
+
+
 
 // POST to add new koala to database
 koalaRouter.post('/', (req, res) => {
@@ -51,7 +55,6 @@ koalaRouter.post('/', (req, res) => {
 			res.sendStatus(500);
 		});
 });
-
 // PUT
 
 
