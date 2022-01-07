@@ -56,6 +56,31 @@ koalaRouter.post('/', (req, res) => {
 		});
 });
 // PUT
+koalaRouter.put('/:id', (req, res) => {
+    // Grab the URL parameter
+    console.log('id is', req.params.id);
+    console.log('req.params.ready_to_transfer is', req.body.ready_to_transfer);
+    console.log('req.body', req.body);
+    let queryText = `
+    UPDATE "koalas"
+    SET "ready_to_transfer" = $1
+    WHERE "id" = $2;
+    `;
+    let queryParams = [
+        req.body.ready_to_transfer,         //$1
+        req.params.id                       //$2
+    ];
+
+    pool.query(queryText, queryParams)
+    .then(() =>{
+        res.sendStatus(204);
+    })
+    .catch((err) => {
+        console.log('PUT /koalas failed!', err);
+        res.sendStatus(500);
+    });
+})
+  
 
 
 // DELETE
