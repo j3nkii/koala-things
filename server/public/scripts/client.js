@@ -77,12 +77,6 @@ function getKoalas(){
 
 
 function saveKoala( newKoala ){
-  if(!/^[a-zA-z]+$/.test(newKoala.name) ||
-    !/^[MF]$/.test(newKoala.gender) ||
-    !/^[0-9]{1,2}$/.test(newKoala.age) ||
-    !/^[YN]$/.test(newKoala.ready_to_transfer)){
-      return alert('nah son')
-    }
   console.log( 'in saveKoala', newKoala );
   // ajax to send new koala
   $.ajax({

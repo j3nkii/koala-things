@@ -34,26 +34,35 @@ koalaRouter.get('/', (req, res) => {
 koalaRouter.post('/', (req, res) => {
 	let newKoala = req.body;
 	console.log(`Adding koala:`, newKoala);
+	
+	if(/^[a-zA-z]+$/.test(newKoala.name) &&
+		/^[MF]$/.test(newKoala.gender) &&
+		/^[0-9]{1,2}$/.test(newKoala.age) &&
+		/^[YN]$/.test(newKoala.ready_to_transfer)){
+		let queryText = `INSERT INTO "koalas" 
+							("name", "gender", "age", "ready_to_transfer", "notes")
+						VALUES ($1, $2, $3, $4, $5);
+						`;
 
-	let queryText = `INSERT INTO "koalas" 
-                        ("name", "gender", "age", "ready_to_transfer", "notes")
-                    VALUES ($1, $2, $3, $4, $5);
-                    `;
-
-	pool
-		.query(queryText, [ newKoala.name,
-                            newKoala.gender,
-                            newKoala.age,
-                            newKoala.ready_to_transfer,
-                            newKoala.notes
-                            ])
-		.then((result) => {
-			res.sendStatus(201);
-		})
-		.catch((error) => {
-			console.log(`Error adding new koala`, error);
-			res.sendStatus(500);
-		});
+		pool
+			.query(queryText, [ newKoala.name,
+								newKoala.gender,
+								newKoala.age,
+								newKoala.ready_to_transfer,
+								newKoala.notes
+								])
+			.then((result) => {
+				res.sendStatus(201);
+			})
+			.catch((error) => {
+				console.log(`Error adding new koala`, error);
+				res.sendStatus(500);
+			});
+		
+		}else{
+			res.sendStatus(400)
+			console.log('no');
+		}
 });
 // PUT
 koalaRouter.put('/:id', (req, res) => {
