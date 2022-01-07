@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "nodemon": "^2.0.15",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "sweetalert2": "^11.3.3"
   }
 }
